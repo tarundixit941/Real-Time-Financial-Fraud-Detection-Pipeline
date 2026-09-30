@@ -216,3 +216,67 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+dist/
+build/
+*.egg-info/
+
+
+# Data folders
+data/
+datasets/
+*.csv
+*.json
+*.parquet
+
+# Specific PaySim download exclusion
+*paysim*
+
+
+# Kafka and Zookeeper local data/logs
+logs/
+kafka-logs/
+zookeeper-data/
+*.log
+
+
+# Spark checkpointing and warehouse
+.spark-stitching/
+checkpoint/
+spark-warehouse/
+metastore_db/
+derby.log
+
+
+# NoSQL Local Data Storage
+data/db/
+cassandra-data/
+*.db
+
+
+# Credentials and Configuration Secrets
+.env
+*.env
+config.ini
+secrets.json
+
+
+# IDEs
+.vscode/
+.idea/
+
+# Prometheus / Grafana local runtime data
+prometheus-data/
+grafana-data/
+
+
