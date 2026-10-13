@@ -53,6 +53,9 @@ services:
       - prometheus
     networks:
       - pipeline_network
+    environment:
+      - GF_INSTALL_PLUGINS=hadara-cassandra-datasource
+
 
 networks:
   pipeline_network:
