@@ -7,6 +7,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
       - "2181:2181"
+    networks:
+      - pipeline_network
 
   kafka:
     image: confluentinc/cp-kafka:7.3.0
@@ -21,6 +23,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - pipeline_network
 
   cassandra:
     image: cassandra:4.1
@@ -28,6 +32,8 @@ services:
       - "9042:9042"
     environment:
       - CASSANDRA_CLUSTER_NAME=FraudDetectionCluster
+    networks:
+      - pipeline_network
 
   prometheus:
     image: prom/prometheus:latest
@@ -35,6 +41,8 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - pipeline_network
 
   grafana:
     image: grafana/grafana:latest
@@ -43,3 +51,9 @@ services:
     depends_on:
       - cassandra
       - prometheus
+    networks:
+      - pipeline_network
+
+networks:
+  pipeline_network:
+    driver: bridge
