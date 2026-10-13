@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+
+  - name: Apache_Cassandra_Cluster
+    type: evaluation-datasource
+    access: proxy
+    url: localhost:9042
+    jsonData:
+      keyspace: fraud_detection
+    editable: true
