@@ -9,9 +9,10 @@ datasources:
     editable: true
 
   - name: Apache_Cassandra_Cluster
-    type: evaluation-datasource
+    type: hadara-cassandra-datasource
     access: proxy
-    url: localhost:9042
+    url: cassandra:9042
     jsonData:
       keyspace: fraud_detection
+      consistency: ONE
     editable: true
