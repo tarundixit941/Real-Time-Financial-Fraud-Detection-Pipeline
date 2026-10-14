@@ -6,7 +6,10 @@ datasources:
     access: proxy
     url: http://prometheus:9090
     isDefault: true
-    editable: true
+    jsonData:
+      httpMethod: POST
+    editable: false
+
 
   - name: Apache_Cassandra_Cluster
     type: hadara-cassandra-datasource
@@ -15,4 +18,8 @@ datasources:
     jsonData:
       keyspace: fraud_detection
       consistency: ONE
-    editable: true
+      timeout: 30000
+    secureJsonData:
+      # Prevents plain text metadata leakage across configuration monitoring loops
+      tlsSkipVerify: true
+    editable: false
