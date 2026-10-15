@@ -26,7 +26,6 @@
             "type": "hadara-cassandra-datasource",
             "uid": "cassandra_metrics"
           },
-          "queryType": "randomWalk",
           "rawSql": "SELECT count(*) FROM fraud_detection.flagged_transactions;",
           "refId": "A"
         }
@@ -48,10 +47,44 @@
                 "value": null
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 2,
+      "title": "High-Risk Vector Analysis by Channel Type",
+      "type": "bargauge",
+      "targets": [
+        {
+          "datasource": {
+            "type": "hadara-cassandra-datasource",
+            "uid": "cassandra_metrics"
           },
-          "unit": "short"
-        },
-        "overrides": []
+          "rawSql": "SELECT type, amount FROM fraud_detection.flagged_transactions;",
+          "refId": "B"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["sum"],
+          "fields": "",
+          "values": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decibel"
+        }
       }
     }
   ],
@@ -72,5 +105,5 @@
   },
   "timezone": "browser",
   "title": "Real-Time Financial Fraud Monitoring Console",
-  "version": 2
+  "version": 3
 }
