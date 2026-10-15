@@ -279,3 +279,18 @@ secrets.json
 prometheus-data/
 grafana-data/
 
+
+# Python isolated environment environments layer parameters
+.venv/
+__pycache__/
+*.pyc
+
+# Apache Spark temporary checkpoint directories and memory state registers
+checkpoint/
+.ivy2/
+metastore_db/
+derby.log
+
+# System operational hidden logs configurations
+.DS_Store
+Thumbs.db
