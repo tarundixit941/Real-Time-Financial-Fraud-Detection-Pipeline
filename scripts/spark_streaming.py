@@ -66,14 +66,16 @@ scored_stream_df = parsed_stream_df.withColumn(
 # Filtering dynamic framework dataset to only grab anomalous rows
 fraud_alerts_df = scored_stream_df
 
-# In-Memory execution table configuration (Totally bypasses Windows Local Disk Permissions)
+# Start the ingestion execution channel using strict 500ms micro-batch trigger logic
 print("🚀 Real-Time scoring engine successfully active! Routing execution window...\n")
 
 query = fraud_alerts_df.writeStream \
     .format("memory") \
     .queryName("fraud_alerts_table") \
     .outputMode("append") \
+    .trigger(processingTime='500 milliseconds') \
     .start()
+
 
 # Inline continuous execution loops monitoring structure
 try:
