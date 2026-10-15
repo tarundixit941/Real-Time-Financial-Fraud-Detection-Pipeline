@@ -48,7 +48,7 @@ try:
             producer.send(TOPIC_NAME, transaction_data)
             
             # 0.1 second ka delay (real-time stream feel ke liye)
-            time.sleep(0.1)
+            time.sleep(0.0001)
             
         print("✨ 1000 transactions safalta-purvak bhej diye gaye hain...")
 
