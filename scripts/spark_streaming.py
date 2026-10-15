@@ -11,13 +11,14 @@ os.environ["HADOOP_USER_NAME"] = "hadoop"
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# Spark Session initialization
+# Spark Session initialization with optimized resource configs
 spark = SparkSession.builder \
     .appName("RealTimeFraudDetector Pipeline") \
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0") \
     .config("spark.sql.shuffle.partitions", "2") \
     .config("spark.driver.extraJavaOptions", "-Dio.netty.tryReflectionSetAccessible=true") \
     .getOrCreate()
+
 
 # Logging silent logic to suppress redundant warnings
 spark.sparkContext.setLogLevel("ERROR")
