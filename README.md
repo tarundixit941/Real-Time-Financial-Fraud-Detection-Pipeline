@@ -26,3 +26,16 @@ This document outlines the exposed network topology, system endpoints, and infra
 *   **Apache Cassandra Database Access:**
     *   **Native Endpoint connection:** `localhost:9042`
     *   **Default Command Line Interface CLI Shell Tool:** `cqlsh`
+
+
+## ⚡ High-Throughput Cluster Optimization (Scaling Step)
+
+To maximize data pipeline parallel ingestion speeds and avoid bottleneck lags under heavy processing bursts, scale the active Kafka topic partitions from a single instance up to a distributed multi-threaded model.
+
+Execute this partition modification shell directly inside the running Kafka broker terminal layer:
+
+```bash
+docker exec -it config-kafka-1 kafka-topics --alter --topic financial-transactions --partitions 3 --bootstrap-server localhost:9092
+```
+
+*Note: Scaling partitions to `3` enables Apache Spark to map multiple concurrent executor threads directly to separate data queues, multiplying real-time stream ingestion throughput.*
