@@ -70,10 +70,11 @@ fraud_alerts_df = scored_stream_df
 print("🚀 Real-Time scoring engine successfully active! Routing execution window...\n")
 
 query = fraud_alerts_df.writeStream \
-    .format("memory") \
-    .queryName("fraud_alerts_table") \
+    .format("org.apache.spark.sql.cassandra") \
+    .option("keyspace", "fraud_detection") \
+    .option("table", "flagged_transactions") \
+    .option("checkpointLocation", os.path.join(BASE_DIR, 'checkpoint')) \
     .outputMode("append") \
-    .trigger(processingTime='500 milliseconds') \
     .start()
 
 
