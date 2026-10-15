@@ -11,13 +11,16 @@ os.environ["HADOOP_USER_NAME"] = "hadoop"
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# Spark Session initialization with optimized resource configs
+# 2. Spark Session initialization with advanced memory allocation configurations
 spark = SparkSession.builder \
     .appName("RealTimeFraudDetector Pipeline") \
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0") \
     .config("spark.sql.shuffle.partitions", "2") \
-    .config("spark.driver.extraJavaOptions", "-Dio.netty.tryReflectionSetAccessible=true") \
+    .config("spark.driver.memory", "2g") \
+    .config("spark.executor.memory", "2g") \
+    .config("spark.driver.extraJavaOptions", "-Dio.netty.tryReflectionSetAccessible=true -XX:+UseG1GC") \
     .getOrCreate()
+
 
 
 # Logging silent logic to suppress redundant warnings
